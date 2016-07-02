@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      });
+    </script>
+    <meta charset="UTF-8">
+    <title>Pacman Game</title>
+  </head>
+    <body>
+      <!-- <div class='row'>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+      </div>
+      <div class='row'>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='pacman'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+      </div>
+      <div class='row'>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='empty'></div>
+        <div class='coin'></div>
+        <div class='empty'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+      </div>
+      <div class='row'>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+      </div>
+      <div class='row'>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='coin'></div>
+        <div class='brick'></div>
+      </div> -->
+      <div class='row'>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='shell'></div>
+        <div class='brick'></div>
+        <div class='brick'></div>
+        <div class='shell'></div>
+        <div class='brick'></div>
+        <div class='shell'></div>
+        <div class='brick'></div>
+      </div>
+      <div id="container">
+        <div id='world'></div>
+
+        <div id="pacman" style="top: 40px; left:40px;"></div>
+      </div>
+
+      <script>
+
+      var world = [
+        [2,1,1,2,1,2,1,1,2,2],
+        [2,1,1,1,1,1,1,1,1,2],
+        [2,2,1,1,2,1,2,1,1,2],
+        [2,1,2,1,2,1,1,1,1,2],
+        [2,1,1,1,1,1,2,1,1,2],
+        [2,1,1,2,2,1,1,1,1,2],
+        [2,2,1,2,1,1,2,2,1,2],
+        [2,1,1,1,1,1,1,1,2,2],
+        [2,2,2,2,2,2,2,2,2,2]
+      ];
+
+      var pacman = {
+        x:1,
+        y:1
+      };
+
+      function displayWorld(){
+        var output = '';
+
+        for(var i=0; i<world.length; i++){
+          output += "\n<div class='row'>";
+          for(var j=0; j<world[i].length; j++){
+            if(world[i][j] == 2)
+            output += "\n\t<div class='brick'></div>";
+          else if(world[i][j] == 1)
+            output += "\n\t<div class='coin'></div>";
+          if(world[i][j] == 0)
+            output += "\n\t<div class='empty'></div>";
+        }
+        output += "\n</div>";
+      }
+      document.getElementById('world').innerHTML = output;
+    }
+    function displayPacman(){
+      document.getElementById('pacman').style.top = pacman.y*20+"px";
+      document.getElementById('pacman').style.left = pacman.x*20+"px";
+    }
+    displayPacman();
+    displayWorld();
+
+    document.onkeydown = function(e){
+      console.log(e.keyCode);
+      if(e.keyCode == 37){
+        pacman.x--;
+      }
+      else if(e.keyCode == 39){
+        pacman.x++;
+      }
+      else if(e.keyCode == 38){
+        pacman.y--;
+      }
+      else if(e.keyCode == 40){
+        pacman.y++;
+      }
+
+      if(world[pacman.y][pacman.x] == 1){
+        world[pacman.y][pacman.x] = 0;
+        displayWorld();
+      }
+
+      displayPacman();
+      console.log(pacman.x);
+      console.log(pacman.y);
+      // console.log(e.keyCode);
+    }
+      </script>
+
+    </body>
+</html>
